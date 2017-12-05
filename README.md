@@ -6,6 +6,8 @@ This is why I re-wrote the TFTLCD libraries from C++ to pure C and saved almost 
 
 I am using only Arduino Uno and a display with ILI9341 chip, so I removed all other support to make the code simpler 
 and smaller. If I start using another display, I will add support for it based on existing C++ libraries.
+If you are not sure which LCD driver your screen uses, just try the code and open serial therminal. 
+The first thing displayed via UART (baud 9600) is the LCD driver ID.
 I have also improoved the button debouncing significantly.
 
 This repo contains the original Adafruit and MCUFRIEND TFTLCD libraries and examples, 

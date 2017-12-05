@@ -1,0 +1,8 @@
+C_Example/RemoteSystemsTempFiles/
+*.d
+*.o
+*.eep
+*.elf
+*.hex
+*.lss
+*.map

@@ -147,6 +147,14 @@ int main( void )
 
 		GFX_chkBoxDraw(&chk1);
 
+		gfx_led led1;
+		led1.off_color = BLACK;
+		led1.on_color = RED;
+		led1.width = 10;
+		led1.x = 60;
+		led1.y = 250;
+		GFX_LEDDraw(&led1, true);
+
 		_delay_ms(2000);
 
 		GFX_setTextColor(OLIVE, OLIVE);
@@ -171,6 +179,8 @@ int main( void )
 		GFX_btnDraw(&btn2, false);
 
 		TSPoint point;
+
+		uint16_t led1_counter = 0;
 
 		uart_printStr("\n\r\n\n");
 		while(1){
@@ -197,6 +207,17 @@ int main( void )
 
 			if(GFX_btnJustPressed(&btn2)){
 				uart_printStr("\n\r Pressed\n\r");
+			}
+
+			led1_counter++;
+
+			if(led1_counter == 700){
+				GFX_LEDDraw(&led1, false);
+			}
+
+			if(led1_counter == 1500){
+				led1_counter = 0;
+				GFX_LEDDraw(&led1, true);
 			}
 		}
 	}

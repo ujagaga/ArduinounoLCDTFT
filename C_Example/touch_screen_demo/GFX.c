@@ -974,3 +974,16 @@ bool GFX_chkBoxChecked(gfx_chkbox *chk){
 	return chk->checked;
 }
 
+/***************************************************************************/
+// GFX LED element
+
+void GFX_LEDDraw(gfx_led *led, bool state) {
+
+	if(state){
+		GFX_fillCircle(led->x, led->y, led->width, led->on_color );
+	}else{
+		GFX_fillCircle(led->x, led->y, led->width, led->off_color );
+		GFX_drawCircle(led->x, led->y, led->width, led->on_color );
+	}
+}
+
