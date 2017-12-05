@@ -1,0 +1,822 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+                              ./GFX.o (__udivmodhi4)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+                              ./GFX.o (__divmodsi4)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+                              /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o) (__negsi2)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o (exit)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+                              ./GFX.o (__do_copy_data)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+                              ./GFX.o (__do_clear_bss)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+                              ./TouchScreen.o (__mulohisi3)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+                              /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o) (__udivmodsi4)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+                              /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o) (__muluhisi3)
+/usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+                              /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o) (__umulhisi3)
+
+Allocating common symbols
+Common symbol       size              file
+
+_MW                 0x2               ./LCD_ILI9341.o
+wrIdx               0x1               ./uart.o
+rxQueue             0x10              ./uart.o
+_SP                 0x2               ./LCD_ILI9341.o
+_MP                 0x2               ./LCD_ILI9341.o
+_MC                 0x2               ./LCD_ILI9341.o
+_SC                 0x2               ./LCD_ILI9341.o
+_EP                 0x2               ./LCD_ILI9341.o
+_EC                 0x2               ./LCD_ILI9341.o
+rdIdx               0x1               ./uart.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x0000000000000000 0x0000000000020000 xr
+data             0x0000000000800060 0x000000000000ffa0 rw !x
+eeprom           0x0000000000810000 0x0000000000010000 rw !x
+fuse             0x0000000000820000 0x0000000000000400 rw !x
+lock             0x0000000000830000 0x0000000000000400 rw !x
+signature        0x0000000000840000 0x0000000000000400 rw !x
+user_signatures  0x0000000000850000 0x0000000000000400 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+LOAD ./GFX.o
+LOAD ./LCD_ILI9341.o
+LOAD ./TouchScreen.o
+LOAD ./main.o
+LOAD ./uart.o
+START GROUP
+LOAD /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a
+LOAD /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/libm.a
+LOAD /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/libc.a
+LOAD /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/libatmega328p.a
+END GROUP
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x0000000000000000     0x2b3a
+ *(.vectors)
+ .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+                0x0000000000000000                __vectors
+                0x0000000000000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+                0x0000000000000068                . = ALIGN (0x2)
+                0x0000000000000068                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x0000000000000068        0x0 linker stubs
+ *(.trampolines*)
+                0x0000000000000068                __trampolines_end = .
+ *(.progmem*)
+ .progmem.data.font
+                0x0000000000000068      0x500 ./GFX.o
+ .progmem.data.ILI9341_regValues_2_4
+                0x0000000000000568       0x74 ./LCD_ILI9341.o
+                0x00000000000005dc                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000000000005dc                __ctors_start = .
+ *(.ctors)
+                0x00000000000005dc                __ctors_end = .
+                0x00000000000005dc                __dtors_start = .
+ *(.dtors)
+                0x00000000000005dc                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000000000005dc        0x0 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+                0x00000000000005dc                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000000000005dc        0xc /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000000000005e8       0x16 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+                0x00000000000005e8                __do_copy_data
+ .init4         0x00000000000005fe       0x10 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000005fe                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000000000000060e        0x8 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+ *(.init9)
+ *(.text)
+ .text          0x0000000000000616        0x4 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+                0x0000000000000616                __vector_22
+                0x0000000000000616                __vector_1
+                0x0000000000000616                __vector_24
+                0x0000000000000616                __vector_12
+                0x0000000000000616                __bad_interrupt
+                0x0000000000000616                __vector_6
+                0x0000000000000616                __vector_3
+                0x0000000000000616                __vector_23
+                0x0000000000000616                __vector_25
+                0x0000000000000616                __vector_11
+                0x0000000000000616                __vector_13
+                0x0000000000000616                __vector_17
+                0x0000000000000616                __vector_19
+                0x0000000000000616                __vector_7
+                0x0000000000000616                __vector_5
+                0x0000000000000616                __vector_4
+                0x0000000000000616                __vector_9
+                0x0000000000000616                __vector_2
+                0x0000000000000616                __vector_21
+                0x0000000000000616                __vector_15
+                0x0000000000000616                __vector_8
+                0x0000000000000616                __vector_14
+                0x0000000000000616                __vector_10
+                0x0000000000000616                __vector_16
+                0x0000000000000616                __vector_20
+ .text          0x000000000000061a        0x0 ./GFX.o
+ .text          0x000000000000061a        0x0 ./LCD_ILI9341.o
+ .text          0x000000000000061a        0x0 ./TouchScreen.o
+ .text          0x000000000000061a        0x0 ./main.o
+ .text          0x000000000000061a        0x0 ./uart.o
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text          0x000000000000061a        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+                0x000000000000061a                . = ALIGN (0x2)
+ *(.text.*)
+ .text.GFX_init
+                0x000000000000061a       0x5c ./GFX.o
+                0x000000000000061a                GFX_init
+ .text.GFX_drawLine
+                0x0000000000000676      0x114 ./GFX.o
+                0x0000000000000676                GFX_drawLine
+ .text.GFX_fillScreen
+                0x000000000000078a       0x28 ./GFX.o
+                0x000000000000078a                GFX_fillScreen
+ .text.GFX_fillRect
+                0x00000000000007b2        0xe ./GFX.o
+                0x00000000000007b2                GFX_fillRect
+ .text.GFX_drawFastVLine
+                0x00000000000007c0       0x16 ./GFX.o
+                0x00000000000007c0                GFX_drawFastVLine
+ .text.GFX_drawFastHLine
+                0x00000000000007d6       0x14 ./GFX.o
+                0x00000000000007d6                GFX_drawFastHLine
+ .text.GFX_drawRect
+                0x00000000000007ea       0x7a ./GFX.o
+                0x00000000000007ea                GFX_drawRect
+ .text.GFX_drawCircle
+                0x0000000000000864      0x19c ./GFX.o
+                0x0000000000000864                GFX_drawCircle
+ .text.GFX_drawRoundCorner
+                0x0000000000000a00      0x14e ./GFX.o
+                0x0000000000000a00                GFX_drawRoundCorner
+ .text.GFX_fillRoundCorner
+                0x0000000000000b4e      0x15a ./GFX.o
+                0x0000000000000b4e                GFX_fillRoundCorner
+ .text.GFX_fillCircle
+                0x0000000000000ca8       0x54 ./GFX.o
+                0x0000000000000ca8                GFX_fillCircle
+ .text.GFX_drawTriangle
+                0x0000000000000cfc       0x6a ./GFX.o
+                0x0000000000000cfc                GFX_drawTriangle
+ .text.GFX_fillTriangle
+                0x0000000000000d66      0x3b2 ./GFX.o
+                0x0000000000000d66                GFX_fillTriangle
+ .text.GFX_drawRoundRect
+                0x0000000000001118      0x126 ./GFX.o
+                0x0000000000001118                GFX_drawRoundRect
+ .text.GFX_fillRoundRect
+                0x000000000000123e       0xba ./GFX.o
+                0x000000000000123e                GFX_fillRoundRect
+ .text.GFX_drawChar
+                0x00000000000012f8      0x182 ./GFX.o
+                0x00000000000012f8                GFX_drawChar
+ .text.GFX_setTextColor
+                0x000000000000147a       0x12 ./GFX.o
+                0x000000000000147a                GFX_setTextColor
+ .text.GFX_setTextSize
+                0x000000000000148c        0xc ./GFX.o
+                0x000000000000148c                GFX_setTextSize
+ .text.GFX_printStr
+                0x0000000000001498      0x104 ./GFX.o
+                0x0000000000001498                GFX_printStr
+ .text.GFX_printDec
+                0x000000000000159c       0xa4 ./GFX.o
+                0x000000000000159c                GFX_printDec
+ .text.GFX_printHex
+                0x0000000000001640       0x6a ./GFX.o
+                0x0000000000001640                GFX_printHex
+ .text.GFX_setCursor
+                0x00000000000016aa       0x12 ./GFX.o
+                0x00000000000016aa                GFX_setCursor
+ .text.GFX_getCursorX
+                0x00000000000016bc        0xa ./GFX.o
+                0x00000000000016bc                GFX_getCursorX
+ .text.GFX_getCursorY
+                0x00000000000016c6        0xa ./GFX.o
+                0x00000000000016c6                GFX_getCursorY
+ .text.GFX_setTextWrap
+                0x00000000000016d0        0x6 ./GFX.o
+                0x00000000000016d0                GFX_setTextWrap
+ .text.GFX_getRotation
+                0x00000000000016d6        0x6 ./GFX.o
+                0x00000000000016d6                GFX_getRotation
+ .text.GFX_setRotation
+                0x00000000000016dc       0x3e ./GFX.o
+                0x00000000000016dc                GFX_setRotation
+ .text.GFX_cp437
+                0x000000000000171a        0x6 ./GFX.o
+                0x000000000000171a                GFX_cp437
+ .text.GFX_getWidth
+                0x0000000000001720        0xa ./GFX.o
+                0x0000000000001720                GFX_getWidth
+ .text.GFX_getHeight
+                0x000000000000172a        0xa ./GFX.o
+                0x000000000000172a                GFX_getHeight
+ .text.GFX_setWidth
+                0x0000000000001734        0xa ./GFX.o
+                0x0000000000001734                GFX_setWidth
+ .text.GFX_setHeight
+                0x000000000000173e        0xa ./GFX.o
+                0x000000000000173e                GFX_setHeight
+ .text.GFX_btnDraw
+                0x0000000000001748      0x162 ./GFX.o
+                0x0000000000001748                GFX_btnDraw
+ .text.GFX_btnContains
+                0x00000000000018aa       0x48 ./GFX.o
+                0x00000000000018aa                GFX_btnContains
+ .text.GFX_chkBoxDraw
+                0x00000000000018f2       0xcc ./GFX.o
+                0x00000000000018f2                GFX_chkBoxDraw
+ .text.GFX_chkBoxContains
+                0x00000000000019be       0x4c ./GFX.o
+                0x00000000000019be                GFX_chkBoxContains
+ .text.GFX_btnPress
+                0x0000000000001a0a       0x56 ./GFX.o
+                0x0000000000001a0a                GFX_btnPress
+ .text.GFX_btnIsPressed
+                0x0000000000001a60        0x6 ./GFX.o
+                0x0000000000001a60                GFX_btnIsPressed
+ .text.GFX_btnJustReleased
+                0x0000000000001a66       0x14 ./GFX.o
+                0x0000000000001a66                GFX_btnJustReleased
+ .text.GFX_btnJustPressed
+                0x0000000000001a7a       0x1c ./GFX.o
+                0x0000000000001a7a                GFX_btnJustPressed
+ .text.WriteCmdData
+                0x0000000000001a96       0x72 ./LCD_ILI9341.o
+ .text.WriteCmdParamN
+                0x0000000000001b08       0x68 ./LCD_ILI9341.o
+ .text.read16bits
+                0x0000000000001b70       0x32 ./LCD_ILI9341.o
+ .text.readReg40
+                0x0000000000001ba2       0xb2 ./LCD_ILI9341.o
+ .text.unlikely.TFTLCD_readReg32
+                0x0000000000001c54       0x94 ./LCD_ILI9341.o
+ .text.TFTLCD_setAddrWindow
+                0x0000000000001ce8       0x6e ./LCD_ILI9341.o
+ .text.wait_ms  0x0000000000001d56       0x16 ./LCD_ILI9341.o
+                0x0000000000001d56                wait_ms
+ .text.TFTLCD_setRotation
+                0x0000000000001d6c       0xae ./LCD_ILI9341.o
+                0x0000000000001d6c                TFTLCD_setRotation
+ .text.TFTLCD_reset
+                0x0000000000001e1a       0x4c ./LCD_ILI9341.o
+                0x0000000000001e1a                TFTLCD_reset
+ .text.TFTLCD_begin
+                0x0000000000001e66       0xb6 ./LCD_ILI9341.o
+                0x0000000000001e66                TFTLCD_begin
+ .text.TFTLCD_readReg
+                0x0000000000001f1c       0x82 ./LCD_ILI9341.o
+ .text.TFTLCD_readID
+                0x0000000000001f9e      0x104 ./LCD_ILI9341.o
+                0x0000000000001f9e                TFTLCD_readID
+ .text.TFTLCD_drawPixel
+                0x00000000000020a2       0xa0 ./LCD_ILI9341.o
+                0x00000000000020a2                TFTLCD_drawPixel
+ .text.TFTLCD_fillRect
+                0x0000000000002142      0x14e ./LCD_ILI9341.o
+                0x0000000000002142                TFTLCD_fillRect
+ .text.analogRead
+                0x0000000000002290       0x2e ./TouchScreen.o
+ .text.TS_getPoint
+                0x00000000000022be      0x148 ./TouchScreen.o
+                0x00000000000022be                TS_getPoint
+ .text.startup.main
+                0x0000000000002406      0x404 ./main.o
+                0x0000000000002406                main
+ .text.__vector_18
+                0x000000000000280a       0x48 ./uart.o
+                0x000000000000280a                __vector_18
+ .text.uart_init
+                0x0000000000002852       0x1a ./uart.o
+                0x0000000000002852                uart_init
+ .text.uart_print
+                0x000000000000286c       0x24 ./uart.o
+                0x000000000000286c                uart_print
+ .text.uart_printStr
+                0x0000000000002890       0x24 ./uart.o
+                0x0000000000002890                uart_printStr
+ .text.uart_readMsg
+                0x00000000000028b4       0x86 ./uart.o
+                0x00000000000028b4                uart_readMsg
+ .text.uart_printDec
+                0x000000000000293a       0xa4 ./uart.o
+                0x000000000000293a                uart_printDec
+ .text.uart_printHex
+                0x00000000000029de       0x6a ./uart.o
+                0x00000000000029de                uart_printHex
+ .text.libgcc.mul
+                0x0000000000002a48        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.div
+                0x0000000000002a48       0x28 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+                0x0000000000002a48                __udivmodhi4
+ .text.libgcc   0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fixed
+                0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x0000000000002a70        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.div
+                0x0000000000002a70       0x2e /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+                0x0000000000002a70                __divmodsi4
+ .text.libgcc   0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.prologue
+                0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.builtins
+                0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.fmul
+                0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.fixed
+                0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .text.libgcc.mul
+                0x0000000000002a9e        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.div
+                0x0000000000002a9e       0x10 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+                0x0000000000002a9e                __negsi2
+ .text.libgcc   0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.prologue
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.builtins
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.fmul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.fixed
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .text.libgcc.mul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x0000000000002aae        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x0000000000002aae       0x10 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+                0x0000000000002aae                __mulshisi3
+                0x0000000000002ab4                __mulohisi3
+ .text.libgcc.div
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc   0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc.prologue
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc.builtins
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc.fmul
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc.fixed
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .text.libgcc.mul
+                0x0000000000002abe        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.div
+                0x0000000000002abe       0x44 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+                0x0000000000002abe                __udivmodsi4
+ .text.libgcc   0x0000000000002b02        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.prologue
+                0x0000000000002b02        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.builtins
+                0x0000000000002b02        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.fmul
+                0x0000000000002b02        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.fixed
+                0x0000000000002b02        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .text.libgcc.mul
+                0x0000000000002b02       0x16 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+                0x0000000000002b02                __muluhisi3
+ .text.libgcc.div
+                0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc   0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc.prologue
+                0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc.builtins
+                0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc.fmul
+                0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc.fixed
+                0x0000000000002b18        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .text.libgcc.mul
+                0x0000000000002b18       0x1e /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+                0x0000000000002b18                __umulhisi3
+ .text.libgcc.div
+                0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.prologue
+                0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.builtins
+                0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fmul
+                0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fixed
+                0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+                0x0000000000002b36                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000000000002b36        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+                0x0000000000002b36                exit
+                0x0000000000002b36                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x0000000000002b36        0x4 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ *(.fini0)
+                0x0000000000002b3a                _etext = .
+
+.data           0x0000000000800100       0x98 load address 0x0000000000002b3a
+                0x0000000000800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+ .data          0x0000000000800100        0x0 ./GFX.o
+ .data          0x0000000000800100        0x0 ./LCD_ILI9341.o
+ .data          0x0000000000800100        0x0 ./TouchScreen.o
+ .data          0x0000000000800100        0x0 ./main.o
+ .data          0x0000000000800100        0x0 ./uart.o
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ *(.data*)
+ .data.wrap     0x0000000000800100        0x1 ./GFX.o
+                0x0000000000800100                wrap
+ .data.textsize
+                0x0000000000800101        0x1 ./GFX.o
+                0x0000000000800101                textsize
+ .data.textbgcolor
+                0x0000000000800102        0x2 ./GFX.o
+                0x0000000000800102                textbgcolor
+ .data.textcolor
+                0x0000000000800104        0x2 ./GFX.o
+                0x0000000000800104                textcolor
+ .data._height  0x0000000000800106        0x2 ./GFX.o
+                0x0000000000800106                _height
+ .data._width   0x0000000000800108        0x2 ./GFX.o
+                0x0000000000800108                _width
+ *(.rodata)
+ .rodata        0x000000000080010a        0x5 ./GFX.o
+ .rodata        0x000000000080010f        0x5 ./uart.o
+ *(.rodata*)
+ .rodata.str1.1
+                0x0000000000800114       0x84 ./main.o
+                                         0x8e (size before relaxing)
+ *(.gnu.linkonce.d*)
+                0x0000000000800198                . = ALIGN (0x2)
+                0x0000000000800198                _edata = .
+                0x0000000000800198                PROVIDE (__data_end, .)
+
+.bss            0x0000000000800198       0x27
+                0x0000000000800198                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+ .bss           0x0000000000800198        0x0 ./GFX.o
+ .bss           0x0000000000800198        0x0 ./LCD_ILI9341.o
+ .bss           0x0000000000800198        0x0 ./TouchScreen.o
+ .bss           0x0000000000800198        0x0 ./main.o
+ .bss           0x0000000000800198        0x0 ./uart.o
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodhi4.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_divmodsi4.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_negsi2.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_exit.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_copy_data.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_mulshisi3.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_udivmodsi4.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_muluhisi3.o)
+ .bss           0x0000000000800198        0x0 /usr/lib/gcc/avr/4.9.2/avr5/libgcc.a(_umulhisi3.o)
+ *(.bss*)
+ .bss._cp437    0x0000000000800198        0x1 ./GFX.o
+                0x0000000000800198                _cp437
+ .bss.rotation  0x0000000000800199        0x1 ./GFX.o
+                0x0000000000800199                rotation
+ .bss.cursor_y  0x000000000080019a        0x2 ./GFX.o
+                0x000000000080019a                cursor_y
+ .bss.cursor_x  0x000000000080019c        0x2 ./GFX.o
+                0x000000000080019c                cursor_x
+ .bss.done_reset
+                0x000000000080019e        0x1 ./LCD_ILI9341.o
+ *(COMMON)
+ COMMON         0x000000000080019f        0xe ./LCD_ILI9341.o
+                0x000000000080019f                _MW
+                0x00000000008001a1                _SP
+                0x00000000008001a3                _MP
+                0x00000000008001a5                _MC
+                0x00000000008001a7                _SC
+                0x00000000008001a9                _EP
+                0x00000000008001ab                _EC
+ COMMON         0x00000000008001ad       0x12 ./uart.o
+                0x00000000008001ad                wrIdx
+                0x00000000008001ae                rxQueue
+                0x00000000008001be                rdIdx
+                0x00000000008001bf                PROVIDE (__bss_end, .)
+                0x0000000000002b3a                __data_load_start = LOADADDR (.data)
+                0x0000000000002bd2                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00000000008001bf        0x0
+                0x00000000008001bf                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00000000008001bf                PROVIDE (__noinit_end, .)
+                0x00000000008001bf                _end = .
+                0x00000000008001bf                PROVIDE (__heap_start, .)
+
+.eeprom         0x0000000000810000        0x0
+ *(.eeprom*)
+                0x0000000000810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 ./GFX.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000011       0x12 ./LCD_ILI9341.o
+ .comment       0x0000000000000011       0x12 ./TouchScreen.o
+ .comment       0x0000000000000011       0x12 ./main.o
+ .comment       0x0000000000000011       0x12 ./uart.o
+
+.note.gnu.avr.deviceinfo
+                0x0000000000000000       0x40
+ .note.gnu.avr.deviceinfo
+                0x0000000000000000       0x40 /usr/lib/gcc/avr/4.9.2/../../../avr/lib/avr5/crtatmega328p.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info .gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line .debug_line.* .debug_line_end)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(test.elf elf32-avr)
+LOAD linker stubs
