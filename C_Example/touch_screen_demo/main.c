@@ -31,14 +31,19 @@
 #define GREEN       0x07E0      /*   0, 255,   0 */
 #define CYAN        0x07FF      /*   0, 255, 255 */
 #define RED         0xF800      /* 255,   0,   0 */
-#define MAGENTA     0xF81F      /* 255,   0, 255 */
+#define PINK     	0xF81F      /* 255,   0, 255 */
 #define YELLOW      0xFFE0      /* 255, 255,   0 */
 #define WHITE       0xFFFF      /* 255, 255, 255 */
 #define ORANGE      0xFD20      /* 255, 165,   0 */
 #define GREENYELLOW 0xAFE5      /* 173, 255,  47 */
-#define PINK        0xF81F
 
-#define DEBOUNCE_THRESHOLD	500
+
+uint16_t colours[] = {
+		BLACK, NAVY, BLUE, DARKCYAN, CYAN,
+		DARKGREY, LIGHTGREY, OLIVE, DARKGREEN, GREEN, GREENYELLOW,
+		MAROON, RED, PURPLE, PINK,
+		ORANGE, YELLOW, WHITE
+};
 
 int main( void )
 {
@@ -101,20 +106,54 @@ int main( void )
 
 		_delay_ms(2000);
 
+
+#ifdef SUPPORT_VERT_SCROLL
+		GFX_vertScroll(0, 320, 320, BLACK);
+
+#endif
+		GFX_setRotation(1);
+		GFX_fillScreen(BLACK);
+		GFX_setCursor(30, 30);
+
+		GFX_setTextColor(BLACK, RED);
+		GFX_setTextSize(3);
+		GFX_printStr("Rotated screen\n");
+		GFX_setRotation(0);
+
+		_delay_ms(2000);
 		GFX_fillRect(20, 20, 200, 280, BLACK);
 		GFX_drawRect(20, 20, 200, 280, RED);
 		GFX_drawLine(20, 20, 200, 300, BLUE);
 		GFX_drawCircle(50, 50, 20, GREEN);
 		GFX_fillCircle(100, 100, 50, CYAN);
-		GFX_drawTriangle(100, 200, 100, 270, 200, 240, MAGENTA);
+		GFX_drawTriangle(100, 200, 100, 270, 200, 240, PINK);
 		GFX_fillTriangle(120, 220, 120, 250, 180, 240, YELLOW);
-		GFX_fillRect(60, 200, 30, 20, MAGENTA);
+		GFX_fillRect(60, 200, 30, 20, PINK);
+
+		_delay_ms(2000);
+
+#ifdef SUPPORT_VERT_SCROLL
+		GFX_vertScroll(0, 320, 320, BLACK);
+#endif
+		uint16_t y = 0, c = 0;
+		uint8_t h = TFTHEIGHT / (sizeof(colours) / 2);
+
+		while( c < (sizeof(colours) / 2)){
+			GFX_fillRect(0, y, TFTWIDTH, h, colours[c]);
+			uart_printStr("\n\ry: ");
+			uart_printDec(y);
+			uart_printStr("  h: ");
+			uart_printDec(h);
+			c++;
+			y = y + h;
+		};
 
 		_delay_ms(2000);
 
 		GFX_fillRect(40, 40, 160, 240, BLACK);
 		GFX_drawRect(40, 40, 160, 240, GREEN);
 
+#ifdef SUPPORT_BUTTON
 		char btn1_label[] = "Button";
 		gfx_btn btn1;
 
@@ -135,34 +174,62 @@ int main( void )
 
 		/* example of an inverted (pressed) button */
 		GFX_btnDraw(&btn1, true);
+#endif
 
+#ifdef SUPPORT_CHECKBOX
 		gfx_chkbox chk1;
 
-		chk1.color = OLIVE;
-		chk1.fillcolor = BLACK;
+		GFX_chkBoxSetColor(OLIVE, BLACK);
 		chk1.width = 30;
 		chk1.x = 80;
 		chk1.y = 160;
 		chk1.checked = true;
 
 		GFX_chkBoxDraw(&chk1);
+#endif
 
+#ifdef SUPPORT_RADIO_BUTTON
+		gfx_radiobtn radio1, radio2;
+		radio1.x = 60;
+		radio1.y = 200;
+		radio1.radius = 6;
+		radio2.x = 60;
+		radio2.y = 240;
+		radio2.radius = 6;
+		GFX_radioBtnSetColor(LIGHTGREY, BLACK);
+		GFX_radioBtnDraw(&radio1, false);
+		GFX_radioBtnDraw(&radio2, true);
+#endif
+
+#ifdef SUPPORT_LED
 		gfx_led led1;
 		led1.off_color = BLACK;
 		led1.on_color = RED;
-		led1.width = 10;
+		led1.radius = 10;
 		led1.x = 60;
-		led1.y = 250;
+		led1.y = 280;
 		GFX_LEDDraw(&led1, true);
 
+		uint16_t led1_counter = 0;
+#endif
 		_delay_ms(2000);
 
+#ifdef SUPPORT_CHECKBOX
 		GFX_setTextColor(OLIVE, OLIVE);
 		GFX_setTextSize(2);
 		GFX_setCursor(chk1.x + chk1.width/2 + TXTW , chk1.y - TXTH);
 
 		GFX_printStr("Try me");
+#endif
 
+#ifdef SUPPORT_RADIO_BUTTON
+		GFX_setCursor(radio1.x + radio1.radius + TXTW , radio1.y - TXTH);
+		GFX_printStr("option 1");
+		GFX_setCursor(radio2.x + radio2.radius + TXTW , radio2.y - TXTH);
+		GFX_printStr("option 2");
+#endif
+
+#ifdef SUPPORT_BUTTON
 		char btn2_label[] = "Continue";
 		gfx_btn btn2;
 
@@ -174,15 +241,15 @@ int main( void )
 		btn2.textsize = 2;
 		btn2.width = 120;
 		btn2.x = 150;
-		btn2.y = 250;
+		btn2.y = 280;
 
 		GFX_btnDraw(&btn2, false);
+#endif
 
 		TSPoint point;
 
-		uint16_t led1_counter = 0;
-
 		uart_printStr("\n\r\n\n");
+
 		while(1){
 
 			TS_getPoint(&point);
@@ -196,10 +263,15 @@ int main( void )
 				uart_printDec(point.z);
 				uart_printStr("    ");
 			}
-
+#ifdef SUPPORT_BUTTON
 			GFX_btnUpdate(&btn2, &point);
-			GFX_chkBoxUpdate(&chk1, &point);
+#endif
 
+#ifdef SUPPORT_CHECKBOX
+			GFX_chkBoxUpdate(&chk1, &point);
+#endif
+
+#ifdef SUPPORT_BUTTON
 			if(GFX_btnJustReleased(&btn2)){
 				uart_printStr("\n\r Released\n\r");
 				break;
@@ -208,7 +280,9 @@ int main( void )
 			if(GFX_btnJustPressed(&btn2)){
 				uart_printStr("\n\r Pressed\n\r");
 			}
+#endif
 
+#ifdef SUPPORT_LED
 			led1_counter++;
 
 			if(led1_counter == 700){
@@ -219,6 +293,18 @@ int main( void )
 				led1_counter = 0;
 				GFX_LEDDraw(&led1, true);
 			}
+#endif
+
+#ifdef SUPPORT_RADIO_BUTTON
+			if(GFX_radioBtnPressed(&radio1, &point)){
+				GFX_radioBtnDraw(&radio1, true);
+				GFX_radioBtnDraw(&radio2, false);
+			}else if(GFX_radioBtnPressed(&radio2, &point)){
+				GFX_radioBtnDraw(&radio1, false);
+				GFX_radioBtnDraw(&radio2, true);
+			}
+#endif
+
 		}
 	}
 

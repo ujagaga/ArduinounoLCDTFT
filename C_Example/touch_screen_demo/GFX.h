@@ -48,8 +48,6 @@ typedef struct gfx_btn_t{
 typedef struct gfx_chkbox_t{
 	int16_t x;
 	int16_t y;
-	uint16_t fillcolor;
-	uint16_t color;
 	uint8_t width;
 	bool checked;
 	uint8_t debounce;
@@ -60,8 +58,14 @@ typedef struct gfx_led_t{
 	int16_t y;
 	uint16_t off_color;
 	uint16_t on_color;
-	uint8_t width;
+	uint8_t radius;
 }gfx_led;
+
+typedef struct gfx_radio_t{
+	int16_t x;
+	int16_t y;
+	uint8_t radius;
+}gfx_radiobtn;
 
 /* general functions */
 extern uint16_t GFX_init( void );		// returns display ID
@@ -71,10 +75,14 @@ extern void GFX_setHeight(int16_t h);
 extern void GFX_setWidth(int16_t w);
 extern void GFX_setRotation(uint8_t r);
 extern uint8_t GFX_getRotation(void);
+extern void GFX_drawPixel(int16_t x, int16_t y, uint16_t color);
 extern void GFX_fillScreen(uint16_t color);
-/* Check out LCD_ILI9341.h */
+
 #ifdef SUPPORT_VERT_SCROLL
-extern void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset);
+extern void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset, uint16_t color);
+#endif
+#ifdef SUPPORT_READ_PIXEL
+extern uint16_t GFX_readPixel(int16_t x, int16_t y);
 #endif
 
 /* Line functions */
@@ -111,6 +119,7 @@ extern int16_t GFX_getCursorX(void);
 extern int16_t GFX_getCursorY(void);
 extern void GFX_cp437(bool x);
 
+#ifdef SUPPORT_BUTTON
 /* Button functions */
 extern void GFX_btnDraw(gfx_btn *btn, bool inverted);
 extern bool GFX_btnContains(gfx_btn *btn, int16_t x, int16_t y);
@@ -119,15 +128,30 @@ extern bool GFX_btnIsPressed(gfx_btn *btn);
 extern bool GFX_btnJustReleased(gfx_btn *btn);
 extern bool GFX_btnJustPressed(gfx_btn *btn);
 extern void GFX_btnUpdate(gfx_btn *btn, TSPoint *point);
+extern void GFX_setDebounceCount(uint8_t count);
+#endif
 
+#ifdef SUPPORT_CHECKBOX
 /* Checkbox functions */
+void GFX_chkBoxSetColor(uint16_t color, uint16_t bckGndColor);
 extern void GFX_chkBoxDraw(gfx_chkbox *chk);
 extern bool GFX_chkBoxContains(gfx_chkbox *chk, int16_t x, int16_t y);
 extern void GFX_chkBoxPress(gfx_chkbox *chk, bool p);
 extern void GFX_chkBoxUpdate(gfx_chkbox *chk, TSPoint *point);
 extern bool GFX_chkBoxChecked(gfx_chkbox *chk);
+#endif
 
+#ifdef SUPPORT_LED
 /* Light emitting diode (LED) */
 extern void GFX_LEDDraw(gfx_led *led, bool state);
+#endif
+
+#ifdef SUPPORT_RADIO_BUTTON
+/* Radio button */
+extern void GFX_radioBtnSetColor(uint16_t color, uint16_t bckGndColor);
+extern void GFX_radioBtnDraw(gfx_radiobtn *radio, bool state);
+extern bool GFX_radioBtnContains(gfx_radiobtn *radio, int16_t x, int16_t y);
+extern bool GFX_radioBtnPressed(gfx_radiobtn *radio, TSPoint *point);
+#endif
 
 #endif // _ADAFRUIT_GFX_H

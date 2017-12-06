@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "GFX.h"
-#include "HW_config.h"
-
+#include <util/delay.h>
 
 #ifndef min
  #define min(a,b) ((a < b) ? a : b)
@@ -21,6 +20,11 @@ uint8_t textsize = 1;
 uint8_t rotation = 0;
 bool wrap = true;   // If set, 'wrap' text at right edge of display
 bool _cp437 = false; // If set, use correct CP437 charset (default is off)
+uint16_t chkBoxBckGndColor = 0xff;
+uint16_t chkBoxColor = 0;
+uint16_t radioBckGndColor = 0xff;
+uint16_t radioColor = 0;
+uint8_t _debounce_count = 0xff;
 
 // Standard ASCII 5x7 font
 
@@ -352,6 +356,10 @@ uint16_t GFX_init( void ){
   TFTLCD_setRotation(0);             //PORTRAIT
 
   return TFTLCD_readID();
+}
+
+void GFX_drawPixel(int16_t x, int16_t y, uint16_t color){
+	TFTLCD_drawPixel(x, y, color);
 }
 
 // Bresenham's algorithm - thx wikpedia
@@ -824,15 +832,28 @@ static void write(uint8_t c) {
 }
 
 #ifdef SUPPORT_VERT_SCROLL
-void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset){
-	TFTLCD_vertScroll(top, scrollines, offset);
+void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset, uint16_t color){
+	uint16_t i;
+
+	for(i=0; i < scrollines; i++){
+		TFTLCD_vertScroll(top, scrollines, i);
+		GFX_drawFastHLine(0, i, TFTWIDTH, color);
+		_delay_ms(1);
+	}
+	_delay_ms(500); /* Wait for rotation to end */
+}
+#endif
+
+#ifdef SUPPORT_READ_PIXEL
+uint16_t GFX_readPixel(int16_t x, int16_t y){
+	return TFTLCD_readPixel(x, y);
 }
 #endif
 
 /***************************************************************************/
 // GFX button UI element
 
-
+#ifdef SUPPORT_BUTTON
 void GFX_btnDraw(gfx_btn *btn, bool inverted) {
 
 	if (! inverted) {
@@ -872,7 +893,7 @@ void GFX_btnPress(gfx_btn *btn, bool p) {
 			btn->currstate = true;
 		}
 
-		btn->debounce = 0xff;
+		btn->debounce = _debounce_count;
 	}else{
 		if(btn->debounce > 0){
 			btn->debounce--;
@@ -915,24 +936,30 @@ void GFX_btnUpdate(gfx_btn *btn, TSPoint *point){
 		GFX_btnPress(btn, false);
 	}
 }
-
+#endif
 /***************************************************************************/
 // GFX check box UI element
+#ifdef SUPPORT_CHECKBOX
+
+void GFX_chkBoxSetColor(uint16_t color, uint16_t bckGndColor){
+	chkBoxColor = color;
+	chkBoxBckGndColor = bckGndColor;
+}
 
 void GFX_chkBoxDraw(gfx_chkbox *chk) {
 	uint16_t x = chk->x - chk->width/2;
 	uint16_t y = chk->y - chk->width/2;
 	uint16_t r = chk->width/4;
 
-	GFX_fillRoundRect(x, y, chk->width, chk->width, r, chk->fillcolor);
-	GFX_drawRoundRect(x, y, chk->width, chk->width, r, chk->color);
+	GFX_fillRoundRect(x, y, chk->width, chk->width, r, chkBoxBckGndColor);
+	GFX_drawRoundRect(x, y, chk->width, chk->width, r, chkBoxColor);
 
 
 	if(chk->checked){
 		GFX_drawLine(x + chk->width/4 - 1, y + chk->width/4 - 1,
-				x + chk->width - chk->width/4, y + chk->width - chk->width/4, chk->color);
+				x + chk->width - chk->width/4, y + chk->width - chk->width/4, chkBoxColor);
 		GFX_drawLine(x + chk->width/4 - 1, y + chk->width - chk->width/4,
-				x + chk->width - chk->width/4, y + chk->width/4 - 1, chk->color);
+				x + chk->width - chk->width/4, y + chk->width/4 - 1, chkBoxColor);
 	}
 	chk->debounce = 0;
 }
@@ -973,17 +1000,63 @@ void GFX_chkBoxUpdate(gfx_chkbox *chk, TSPoint *point){
 bool GFX_chkBoxChecked(gfx_chkbox *chk){
 	return chk->checked;
 }
+#endif
 
 /***************************************************************************/
 // GFX LED element
-
+#ifdef SUPPORT_LED
 void GFX_LEDDraw(gfx_led *led, bool state) {
 
 	if(state){
-		GFX_fillCircle(led->x, led->y, led->width, led->on_color );
+		GFX_fillCircle(led->x, led->y, led->radius, led->on_color );
 	}else{
-		GFX_fillCircle(led->x, led->y, led->width, led->off_color );
-		GFX_drawCircle(led->x, led->y, led->width, led->on_color );
+		GFX_fillCircle(led->x, led->y, led->radius, led->off_color );
+		GFX_drawCircle(led->x, led->y, led->radius, led->on_color );
+	}
+}
+#endif
+
+/***************************************************************************/
+// GFX radio button element
+
+#ifdef SUPPORT_RADIO_BUTTON
+void GFX_radioBtnSetColor(uint16_t color, uint16_t bckGndColor){
+	radioColor = color;
+	radioBckGndColor = bckGndColor;
+}
+
+void GFX_radioBtnDraw(gfx_radiobtn *radio, bool state) {
+	if(radio->radius < 3){
+		radio->radius = 3;
+	}
+
+	GFX_fillCircle(radio->x, radio->y, radio->radius, radioBckGndColor );
+	GFX_drawCircle(radio->x, radio->y, radio->radius, radioColor );
+
+	if(state){
+		GFX_fillCircle(radio->x, radio->y, radio->radius - 2, radioColor );
 	}
 }
 
+bool GFX_radioBtnContains(gfx_radiobtn *radio, int16_t x, int16_t y) {
+	int xd = radio->x - x;
+	int yd = radio->y - y;
+
+	if (((xd * xd) + (yd * yd)) > (radio->radius * radio->radius)) return false;
+
+	return true;
+}
+
+bool GFX_radioBtnPressed(gfx_radiobtn *radio, TSPoint *point) {
+	if(point->z > 0){
+		if(GFX_radioBtnContains(radio, point->x, point->y)){
+			return true;
+		}
+	}
+	return false;
+}
+#endif
+
+void GFX_setDebounceCount(uint8_t count){
+	_debounce_count = count;
+}

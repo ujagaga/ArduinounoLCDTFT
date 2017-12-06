@@ -4,7 +4,6 @@
 #include <util/delay.h>
 #include <avr/pgmspace.h>
 #include "reg_helper.h"
-#include "HW_config.h"
 #include "GFX.h"
 
 #define MIPI_DCS_REV1   (1<<0)
@@ -282,10 +281,8 @@ void TFTLCD_setRotation(uint8_t r)
 
 static void TFTLCD_setAddrWindow(int16_t x, int16_t y, int16_t x1, int16_t y1)
 {
-
 	WriteCmdParam4(_MC, x >> 8, x, x1 >> 8, x1);
 	WriteCmdParam4(_MP, y >> 8, y, y1 >> 8, y1);
-
 }
 
 //void TFTLCD_pushColors1(uint16_t * block, int16_t n, bool first)

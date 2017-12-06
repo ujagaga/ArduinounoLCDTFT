@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "GFX.h"
-#include "HW_config.h"
+#include <util/delay.h>
 
 #ifndef min
  #define min(a,b) ((a < b) ? a : b)
@@ -20,6 +20,11 @@ uint8_t textsize = 1;
 uint8_t rotation = 0;
 bool wrap = true;   // If set, 'wrap' text at right edge of display
 bool _cp437 = false; // If set, use correct CP437 charset (default is off)
+uint16_t chkBoxBckGndColor = 0xff;
+uint16_t chkBoxColor = 0;
+uint16_t radioBckGndColor = 0xff;
+uint16_t radioColor = 0;
+uint8_t _debounce_count = 0xff;
 
 // Standard ASCII 5x7 font
 
@@ -351,6 +356,10 @@ uint16_t GFX_init( void ){
   TFTLCD_setRotation(0);             //PORTRAIT
 
   return TFTLCD_readID();
+}
+
+void GFX_drawPixel(int16_t x, int16_t y, uint16_t color){
+	TFTLCD_drawPixel(x, y, color);
 }
 
 // Bresenham's algorithm - thx wikpedia
@@ -808,42 +817,57 @@ void GFX_setHeight(int16_t h) {
 static void write(uint8_t c) {
 
   if (c == '\n') {
-    cursor_y += textsize*8;
+    cursor_y += textsize*TXTH;
     cursor_x  = 0;
   } else if (c == '\r') {
     // skip em
   } else {
     GFX_drawChar(cursor_x, cursor_y, c, textcolor, textbgcolor, textsize);
-    cursor_x += textsize*6;
-    if (wrap && (cursor_x > (_width - textsize*6))) {
-      cursor_y += textsize*8;
+    cursor_x += textsize*TXTW;
+    if (wrap && (cursor_x > (_width - textsize*TXTW))) {
+      cursor_y += textsize*TXTH;
       cursor_x = 0;
     }
   }
 }
 
 #ifdef SUPPORT_VERT_SCROLL
-void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset){
-	TFTLCD_vertScroll(top, scrollines, offset);
+void GFX_vertScroll(int16_t top, int16_t scrollines, int16_t offset, uint16_t color){
+	uint16_t i;
+
+	for(i=0; i < scrollines; i++){
+		TFTLCD_vertScroll(top, scrollines, i);
+		GFX_drawFastHLine(0, i, TFTWIDTH, color);
+		_delay_ms(1);
+	}
+	_delay_ms(500); /* Wait for rotation to end */
+}
+#endif
+
+#ifdef SUPPORT_READ_PIXEL
+uint16_t GFX_readPixel(int16_t x, int16_t y){
+	return TFTLCD_readPixel(x, y);
 }
 #endif
 
 /***************************************************************************/
-// code for the GFX button UI element
+// GFX button UI element
 
-
+#ifdef SUPPORT_BUTTON
 void GFX_btnDraw(gfx_btn *btn, bool inverted) {
 
 	if (! inverted) {
-		GFX_fillRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height, min(btn->width, btn->height)/4, btn->fillcolor);
+		GFX_fillRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height,
+				min(btn->width, btn->height)/4, btn->fillcolor);
 		GFX_setTextColor(btn->textcolor, btn->fillcolor);
 	} else {
-		GFX_fillRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height, min(btn->width, btn->height)/4, btn->textcolor);
+		GFX_fillRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height,
+				min(btn->width, btn->height)/4, btn->textcolor);
 		GFX_setTextColor(btn->fillcolor, btn->textcolor);
 	}
 
 	GFX_drawRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height, min(btn->width, btn->height)/4, btn->outlinecolor);
-	GFX_setCursor(btn->x - strlen(btn->label)*3*btn->textsize, btn->y-4*btn->textsize);
+	GFX_setCursor(btn->x - strlen(btn->label)*(TXTW/2)*btn->textsize, btn->y-(TXTH/2)*btn->textsize);
 	GFX_setTextSize(btn->textsize);
 	GFX_printStr(btn->label);
 	btn->currstate = false;
@@ -857,24 +881,6 @@ bool GFX_btnContains(gfx_btn *btn, int16_t x, int16_t y) {
 	return true;
 }
 
-void GFX_chkBoxDraw(gfx_chkbox *chk, bool checked) {
-	uint16_t x = chk->x - chk->width/2;
-	uint16_t y = chk->y - chk->width/2;
-
-	GFX_drawRoundRect(x, y, chk->width, chk->width, chk->width/4, chk->color);
-
-	if(checked){
-		GFX_drawLine(x + chk->width/4 - 1, y + chk->width/4 - 1, x + chk->width - chk->width/4, y + chk->width - chk->width/4, chk->color);
-		GFX_drawLine(x + chk->width/4 - 1, y + chk->width - chk->width/4, x + chk->width - chk->width/4, y + chk->width/4 - 1, chk->color);
-	}
-}
-
-bool GFX_chkBoxContains(gfx_chkbox *chk, int16_t x, int16_t y) {
-	if ((x < (chk->x - chk->width/2)) || (x > (chk->x + chk->width/2))) return false;
-	if ((y < (chk->y - chk->width/2)) || (y > (chk->y + chk->width/2))) return false;
-	return true;
-}
-
 void GFX_btnPress(gfx_btn *btn, bool p) {
 
 	if(p){
@@ -882,14 +888,18 @@ void GFX_btnPress(gfx_btn *btn, bool p) {
 			GFX_btnDraw(btn, true);
 			btn->laststate = false;
 			btn->currstate = true;
+		}else{
+			btn->laststate = true;
+			btn->currstate = true;
 		}
-		btn->debounce = 0xff;
+
+		btn->debounce = _debounce_count;
 	}else{
 		if(btn->debounce > 0){
 			btn->debounce--;
 		}else{
-			btn->currstate = false;
 			btn->laststate = false;
+			btn->currstate = false;
 		}
 
 		if(btn->debounce == 1){
@@ -905,5 +915,148 @@ bool GFX_btnIsPressed(gfx_btn *btn) {
 }
 
 bool GFX_btnJustReleased(gfx_btn *btn) {
-	return (!btn->currstate && btn->laststate);
+	bool res = (!(btn->currstate)) && btn->laststate;
+	return (res);
+}
+
+bool GFX_btnJustPressed(gfx_btn *btn) {
+	bool res = btn->currstate && (!btn->laststate) && (btn->debounce == 0xff);
+	return res;
+}
+
+void GFX_btnUpdate(gfx_btn *btn, TSPoint *point){
+
+	if(point->z > 0){
+		if(GFX_btnContains(btn, point->x, point->y)){
+			GFX_btnPress(btn, true);
+		}else{
+			GFX_btnPress(btn, false);
+		}
+	}else{
+		GFX_btnPress(btn, false);
+	}
+}
+#endif
+/***************************************************************************/
+// GFX check box UI element
+#ifdef SUPPORT_CHECKBOX
+
+void GFX_chkBoxSetColor(uint16_t color, uint16_t bckGndColor){
+	chkBoxColor = color;
+	chkBoxBckGndColor = bckGndColor;
+}
+
+void GFX_chkBoxDraw(gfx_chkbox *chk) {
+	uint16_t x = chk->x - chk->width/2;
+	uint16_t y = chk->y - chk->width/2;
+	uint16_t r = chk->width/4;
+
+	GFX_fillRoundRect(x, y, chk->width, chk->width, r, chkBoxBckGndColor);
+	GFX_drawRoundRect(x, y, chk->width, chk->width, r, chkBoxColor);
+
+
+	if(chk->checked){
+		GFX_drawLine(x + chk->width/4 - 1, y + chk->width/4 - 1,
+				x + chk->width - chk->width/4, y + chk->width - chk->width/4, chkBoxColor);
+		GFX_drawLine(x + chk->width/4 - 1, y + chk->width - chk->width/4,
+				x + chk->width - chk->width/4, y + chk->width/4 - 1, chkBoxColor);
+	}
+	chk->debounce = 0;
+}
+
+bool GFX_chkBoxContains(gfx_chkbox *chk, int16_t x, int16_t y) {
+	if ((x < (chk->x - chk->width/2)) || (x > (chk->x + chk->width/2))) return false;
+	if ((y < (chk->y - chk->width/2)) || (y > (chk->y + chk->width/2))) return false;
+	return true;
+}
+
+void GFX_chkBoxPress(gfx_chkbox *chk, bool p) {
+	if(p){
+		if(chk->debounce == 0){
+			chk->checked = !chk->checked;
+			GFX_chkBoxDraw(chk);
+		}
+
+		chk->debounce = 0xff;
+	}else{
+		if(chk->debounce > 0){
+			chk->debounce--;
+		}
+	}
+}
+
+void GFX_chkBoxUpdate(gfx_chkbox *chk, TSPoint *point){
+	if(point->z > 0){
+		if(GFX_chkBoxContains(chk, point->x, point->y)){
+			GFX_chkBoxPress(chk, true);
+		}else{
+			GFX_chkBoxPress(chk, false);
+		}
+	}else{
+		GFX_chkBoxPress(chk, false);
+	}
+}
+
+bool GFX_chkBoxChecked(gfx_chkbox *chk){
+	return chk->checked;
+}
+#endif
+
+/***************************************************************************/
+// GFX LED element
+#ifdef SUPPORT_LED
+void GFX_LEDDraw(gfx_led *led, bool state) {
+
+	if(state){
+		GFX_fillCircle(led->x, led->y, led->radius, led->on_color );
+	}else{
+		GFX_fillCircle(led->x, led->y, led->radius, led->off_color );
+		GFX_drawCircle(led->x, led->y, led->radius, led->on_color );
+	}
+}
+#endif
+
+/***************************************************************************/
+// GFX radio button element
+
+#ifdef SUPPORT_RADIO_BUTTON
+void GFX_radioBtnSetColor(uint16_t color, uint16_t bckGndColor){
+	radioColor = color;
+	radioBckGndColor = bckGndColor;
+}
+
+void GFX_radioBtnDraw(gfx_radiobtn *radio, bool state) {
+	if(radio->radius < 3){
+		radio->radius = 3;
+	}
+
+	GFX_fillCircle(radio->x, radio->y, radio->radius, radioBckGndColor );
+	GFX_drawCircle(radio->x, radio->y, radio->radius, radioColor );
+
+	if(state){
+		GFX_fillCircle(radio->x, radio->y, radio->radius - 2, radioColor );
+	}
+}
+
+bool GFX_radioBtnContains(gfx_radiobtn *radio, int16_t x, int16_t y) {
+	int xd = radio->x - x;
+	int yd = radio->y - y;
+
+	if (((xd * xd) + (yd * yd)) > (radio->radius * radio->radius)) return false;
+
+	return true;
+}
+
+bool GFX_radioBtnPressed(gfx_radiobtn *radio, TSPoint *point) {
+	if(point->z > 0){
+		if(GFX_radioBtnContains(radio, point->x, point->y)){
+			return true;
+		}
+	}
+	return false;
+}
+#endif
+
+void GFX_setDebounceCount(uint8_t count){
+	_debounce_count = count;
 }
