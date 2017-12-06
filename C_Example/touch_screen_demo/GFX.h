@@ -6,30 +6,26 @@
 #include "HW_config.h"
 #include "TouchScreen.h"
 
+/* Including correct header for the display */
 #if DRIVER_ID==9341
 	#include "LCD_ILI9341.h"
 #else
 #error Curently only driver ID 9341 is supported
 #endif
 
-#if TFTWIDTH==240
+/* Define correct text width and height for the font in the GFX.c file,
+ * so we can use it in the other project files. */
 #define TXTW	(6)
-#else
-#define TXTW	(6)
-#endif
-
-#if TFTHEIGHT==240
 #define TXTH	(8)
-#else
-#define TXTH	(8)
-#endif
 
+/* Corner definitions can be used in the
+ * GFX_drawRoundCorner and GFX_fillRoundCorner functions */
 #define CORNER_NW	(0b0001)
 #define CORNER_NE	(0b0010)
 #define CORNER_SE	(0b0100)
 #define CORNER_SW	(0b1000)
 
-
+/* Basic element definitions */
 typedef struct gfx_btn_t{
 	int16_t x;
 	int16_t y;
