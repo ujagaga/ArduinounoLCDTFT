@@ -12,7 +12,8 @@
 #include <util/delay.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "HW_config.h"
+
+#include "config.h"
 #include "GFX.h"
 #include "uart.h"
 #include "TouchScreen.h"

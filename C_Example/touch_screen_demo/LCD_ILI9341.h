@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "HW_config.h"
+
+#include "config.h"
 
 extern void TFTLCD_begin();
 extern void TFTLCD_reset(void);

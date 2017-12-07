@@ -1,5 +1,6 @@
 #include <avr/io.h>
-#include "HW_config.h"
+
+#include "config.h"
 
 /* This file is configured for Arduino Uno only
  * */

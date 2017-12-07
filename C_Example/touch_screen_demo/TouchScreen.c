@@ -1,5 +1,5 @@
 #include <avr/pgmspace.h>
-
+#include <stdbool.h>
 #include "TouchScreen.h"
 #include "reg_helper.h"
 

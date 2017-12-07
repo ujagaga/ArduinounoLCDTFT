@@ -14,3 +14,7 @@ This repo contains the original Adafruit and MCUFRIEND TFTLCD libraries and exam
 my optimized pure C libraries and a touch_screen_demo eclipse example.
 
 Feel free to use as you wish.
+
+NOTE: 
+1. configure the pins used in the reg_helper.c 
+2. configure graphic library functions in config.h (also checkout GFX.h for function reference)
