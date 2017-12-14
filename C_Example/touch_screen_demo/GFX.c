@@ -855,6 +855,10 @@ uint16_t GFX_readPixel(int16_t x, int16_t y){
 
 #ifdef SUPPORT_BUTTON
 void GFX_btnDraw(gfx_btn *btn, bool inverted) {
+/* Save current setting so we can restore it */
+	uint16_t current_text_color = textcolor;
+	uint16_t current_back_color = textbgcolor;
+	uint8_t current_textsize = textsize;
 
 	if (! inverted) {
 		GFX_fillRoundRect(btn->x - (btn->width/2), btn->y - (btn->height/2), btn->width, btn->height,
@@ -873,6 +877,11 @@ void GFX_btnDraw(gfx_btn *btn, bool inverted) {
 	btn->currstate = false;
 	btn->laststate = false;
 	btn->debounce = 0;
+
+	/* Restore current settings */
+	textcolor = current_text_color;
+	textbgcolor = current_back_color;
+	textsize = current_textsize;
 }
 
 bool GFX_btnContains(gfx_btn *btn, int16_t x, int16_t y) {
