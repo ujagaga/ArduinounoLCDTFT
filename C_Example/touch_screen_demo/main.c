@@ -156,7 +156,7 @@ int main( void )
 
 #ifdef SUPPORT_BUTTON
 		char btn1_label[] = "Button";
-		gfx_btn btn1;
+		gfx_btn btn1 = {0};
 
 		btn1.fillcolor = BLUE;
 		btn1.height = 30;
@@ -232,7 +232,7 @@ int main( void )
 
 #ifdef SUPPORT_BUTTON
 		char btn2_label[] = "Continue";
-		gfx_btn btn2;
+		gfx_btn btn2 = {0};
 
 		btn2.fillcolor = ORANGE;
 		btn2.height = 30;

@@ -874,9 +874,6 @@ void GFX_btnDraw(gfx_btn *btn, bool inverted) {
 	GFX_setCursor(btn->x - strlen(btn->label)*(TXTW/2)*btn->textsize, btn->y-(TXTH/2)*btn->textsize);
 	GFX_setTextSize(btn->textsize);
 	GFX_printStr(btn->label);
-	btn->currstate = false;
-	btn->laststate = false;
-	btn->debounce = 0;
 
 	/* Restore current settings */
 	textcolor = current_text_color;
