@@ -883,7 +883,7 @@ void GFX_btnDraw(gfx_btn *btn, bool inverted) {
 
 bool GFX_btnContains(gfx_btn *btn, int16_t x, int16_t y) {
 	if ((x < (btn->x - btn->width/2)) || (x > (btn->x + btn->width/2))) return false;
-	if ((y < (btn->y - btn->height)) || (y > (btn->y + btn->height/2))) return false;
+	if ((y < (btn->y - btn->height/2)) || (y > (btn->y + btn->height/2))) return false;
 	return true;
 }
 
